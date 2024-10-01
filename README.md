@@ -31,11 +31,11 @@ npx degit github:user/repo#branch-name <folder-name>
 4. Cloning this project with skeleton
 
 ```bash
-git clone https://github.com/actionanand/angular-forms.git --branch 1-skeleton angular-proj-name
+git clone https://github.com/actionanand/angular-form.git --branch 1-skeleton angular-proj-name
 ```
 
 ```bash
-npx degit github:actionanand/angular-forms#1-skeleton angular-proj-name
+npx degit github:actionanand/angular-form#1-skeleton angular-proj-name
 ```
 
 ## Automate using `Prettier`, `Es Lint` and `Husky`
