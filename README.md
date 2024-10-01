@@ -244,6 +244,7 @@ setTimeout(() => {
 ```
 
 If you try to update (say email value when app loads) template driven form programmatically using `setValue` on the `controls` of `NgForm`, it'll throw the error as below
+![image](https://github.com/user-attachments/assets/b865d5cc-8fd6-4781-aacc-4989bd40b8dd)
 
 We have to use `setTimeout` to fix the issue as below:
 
