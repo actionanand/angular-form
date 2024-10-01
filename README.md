@@ -224,3 +224,34 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
 
 - [GitHub Actions for Angular](https://github.com/rodrigokamada/angular-github-actions)
 - [Angular 16 - milestone release](https://github.com/actionanand/ng16-signal-milestone-release)
+
+## Issue with `Template driven` form
+
+If you try to update (say email value when app loads) template driven form programmatically using `setValue` on `NgForm`, it'll throw the error as below
+![image](https://github.com/user-attachments/assets/6cbfe931-7b7e-4f19-892b-df7ad3b1e967)
+
+We have to use `setTimeout` to fix the issue as below:
+
+```ts
+// to set value for whole form
+
+setTimeout(() => {
+  this.formData().setValue({
+    email: 'anand@ar.com',
+    password: '',
+  });
+}, 1);
+```
+
+If you try to update (say email value when app loads) template driven form programmatically using `setValue` on the `controls` of `NgForm`, it'll throw the error as below
+![image](https://github.com/user-attachments/assets/b865d5cc-8fd6-4781-aacc-4989bd40b8dd)
+
+We have to use `setTimeout` to fix the issue as below:
+
+```ts
+setTimeout(() => {
+  this.formData().controls['emailField'].setValue('anand@ar.com');
+}, 1);
+```
+
+See the code in this project [here](https://github.com/actionanand/angular-form/blob/master/src/app/auth/login/login.component.ts)
