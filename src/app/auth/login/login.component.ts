@@ -53,10 +53,10 @@ export class LoginComponent {
       return;
     }
 
-    console.log(formEl);
+    console.log('Form Obj(NgForm) : ', formEl);
 
-    console.log(formEl.form.controls['emailField']);
-    console.log(formEl.form.value['emailField']);
+    console.log("formEl.form.controls['emailField'] => ", formEl.form.controls['emailField']);
+    console.log("formEl.form.value['emailField'] => ", formEl.form.value['emailField']);
 
     formEl.form.reset();
   }
