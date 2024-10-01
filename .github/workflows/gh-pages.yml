@@ -34,7 +34,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        base_href: /angular-forms/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        base_href: /angular-form/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
         deploy_branch: gh-pages 
-        publish_dir: dist/angular-forms/browser
+        publish_dir: dist/angular-form/browser
         enable_jekyll: true
