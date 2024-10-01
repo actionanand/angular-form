@@ -12,7 +12,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class LoginComponent {
   minPassLength = 5;
-  private formData = viewChild.required<NgForm>('formEl');
+  private formObj = viewChild.required<NgForm>('formEl');
   private destroyRef = inject(DestroyRef);
 
   constructor() {
@@ -22,17 +22,25 @@ export class LoginComponent {
       if (localFormVal) {
         const savedFormEmail = JSON.parse(localFormVal).email;
 
-        this.formData().setValue({
-          email: savedFormEmail,
-          password: '',
-        });
+        /* // to set value for whole form
+
+        setTimeout(() => {
+          this.formObj().setValue({
+            emailField: savedFormEmail,
+            passField: '',
+          });
+        }, 1); */
+
+        setTimeout(() => {
+          this.formObj().controls['emailField'].setValue(savedFormEmail);
+        }, 1);
       }
 
-      const formSub = this.formData()
+      const formSub = this.formObj()
         .valueChanges?.pipe(debounceTime(1000))
         .subscribe({
           next: form => {
-            localStorage.setItem('saved-login-form', JSON.stringify({ email: form.email }));
+            localStorage.setItem('saved-login-form', JSON.stringify({ email: form.emailField }));
           },
         });
 
@@ -46,6 +54,9 @@ export class LoginComponent {
     }
 
     console.log(formEl);
+
+    console.log(formEl.form.controls['emailField']);
+    console.log(formEl.form.value['emailField']);
 
     formEl.form.reset();
   }
