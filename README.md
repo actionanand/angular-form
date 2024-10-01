@@ -224,3 +224,13 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
 
 - [GitHub Actions for Angular](https://github.com/rodrigokamada/angular-github-actions)
 - [Angular 16 - milestone release](https://github.com/actionanand/ng16-signal-milestone-release)
+
+## Issue with `Template driven` form
+
+If you try to update (say email value when app loads) template driven form programmatically, it'll throw the error as below
+![image](https://github.com/user-attachments/assets/6cbfe931-7b7e-4f19-892b-df7ad3b1e967)
+
+We have to use `setTimeout` to fix the issue as below:
+
+
+
