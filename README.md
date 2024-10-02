@@ -224,6 +224,8 @@ To configure the pre-commit hook, simply add a `precommit` npm script. We want t
 
 - [GitHub Actions for Angular](https://github.com/rodrigokamada/angular-github-actions)
 - [Angular 16 - milestone release](https://github.com/actionanand/ng16-signal-milestone-release)
+- [Angular form github - my proj1](https://github.com/actionanand/ng-rough-work)
+- [Angular form github - my proj2](https://github.com/actionanand/Angular-study-routing)
 
 ## Issue with `Template driven` form
 

@@ -1,6 +1,12 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <header>
-  <img src="logo.jpg" alt="A form and a pencil" />
-  <h1>Angular Forms</h1>
+  <img src="logo.jpg" alt="A form and a pencil" (click)="onChangeForm()" [ngStyle]="{ cursor: 'pointer' }" />
+  <h1>{{ isTempDriven ? title1 : title2 }}</h1>
 </header>
 
-<app-login />
+@if (isTempDriven) {
+  <app-login />
+} @else {
+  <app-login2 />
+}
