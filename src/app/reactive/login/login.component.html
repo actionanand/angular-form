@@ -1,0 +1,27 @@
+<form [formGroup]="formObj" (ngSubmit)="onSubmit()">
+  <h2>Login</h2>
+
+  <div class="control-row">
+    <div class="control no-margin">
+      <label for="email">Email</label>
+      <input id="email" type="email" [formControl]="formObj.controls.emailField" />
+    </div>
+
+    <div class="control no-margin">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="passField" />
+    </div>
+
+    <button class="button">Login</button>
+  </div>
+
+  @if (isEmailValid) {
+    <p class="control-error">Invalid email address entered & Avoid using {{ reservedEmailVal }}</p>
+  }
+
+  @if (isPassValid) {
+    <p class="control-error">
+      Password must be atleast {{ minLength }} characters & should contain the symbol {{ reqSymbolVal }}
+    </p>
+  }
+</form>
