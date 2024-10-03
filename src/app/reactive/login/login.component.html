@@ -16,10 +16,12 @@
   </div>
 
   @if (isEmailValid) {
-    <p class="control-error">Invalid email address entered!</p>
+    <p class="control-error">Invalid email address entered & Avoid using {{ reservedEmailVal }}</p>
   }
 
   @if (isPassValid) {
-    <p class="control-error">Password must be atleast {{ minLength }} characters!</p>
+    <p class="control-error">
+      Password must be atleast {{ minLength }} characters & should contain the symbol {{ reqSymbolVal }}
+    </p>
   }
 </form>
