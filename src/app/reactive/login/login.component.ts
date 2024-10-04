@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/component-class-suffix */
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -24,13 +23,13 @@ function isEmailValidAsync(control: AbstractControl) {
 }
 
 @Component({
-  selector: 'app-login2',
+  selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent2 implements OnInit {
+export class LoginComponent implements OnInit {
   minLength = 5;
   reqSymbolVal = reqSymbol;
   reservedEmailVal = reservedEmail;
