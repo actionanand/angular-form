@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { debounceTime } from 'rxjs';
 
 type MyArray = {
   name: string;
@@ -43,8 +45,9 @@ function valueMustBeTrue(control: AbstractControl) {
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   protected readonly minPassLen = 5;
+  private destroyRef = inject(DestroyRef);
 
   protected readonly genderNames = [
     { name: 'Male', value: 'male' },
@@ -124,6 +127,15 @@ export class SignupComponent {
     hobbies: new FormArray([]),
     terms: new FormControl(false, [Validators.required, valueMustBeTrue]),
   });
+
+  ngOnInit(): void {
+    const formValSub = this.formObj.valueChanges.pipe(debounceTime(5000)).subscribe({
+      next: value =>
+        console.log('Form Changed (form value will be displayed every 5s after you stopped typing): ', value),
+    });
+
+    this.destroyRef.onDestroy(() => formValSub.unsubscribe());
+  }
 
   get fruitsChecked() {
     return this.formObj.get('fruitsAr') as FormArray;
