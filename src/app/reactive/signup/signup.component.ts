@@ -1,10 +1,40 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 type MyArray = {
   name: string;
   value: string;
 };
+
+// factory function - function will return function
+function isValueEqual(controlName1: string, controlName2: string) {
+  return (control: AbstractControl) => {
+    // we apply this validation function to 'formGroup', not to 'formControl', So value won't be available as below function
+    // below commented codes will five same value as val1
+    // this.formObj.controls.passwords.value.password
+    // this.formObj.controls['passwords'].get('password')?.value
+    // this.formObj.controls.passwords.get('password')?.value
+
+    const val1 = control.get(controlName1)?.value;
+    const val2 = control.get(controlName2)?.value;
+
+    if (val1 === val2) {
+      return null;
+    } else {
+      return { valuesNotEqual: true };
+    }
+  };
+}
+
+function valueMustBeTrue(control: AbstractControl) {
+  const val = control.value;
+
+  if (val === true) {
+    return null;
+  } else {
+    return { valueNotTrue: true };
+  }
+}
 
 @Component({
   selector: 'app-signup',
@@ -50,14 +80,19 @@ export class SignupComponent {
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
-    passwords: new FormGroup({
-      password: new FormControl('', {
-        validators: [Validators.required, Validators.minLength(this.minPassLen)],
-      }),
-      confirmPass: new FormControl('', {
-        validators: [Validators.required, Validators.minLength(this.minPassLen)],
-      }),
-    }),
+    passwords: new FormGroup(
+      {
+        password: new FormControl('', {
+          validators: [Validators.required, Validators.minLength(this.minPassLen)],
+        }),
+        confirmPass: new FormControl('', {
+          validators: [Validators.required, Validators.minLength(this.minPassLen)],
+        }),
+      },
+      {
+        validators: [isValueEqual('password', 'confirmPass')],
+      },
+    ),
     firstName: new FormControl('', {
       validators: [Validators.required],
     }),
@@ -87,7 +122,7 @@ export class SignupComponent {
     sourceAr: new FormArray([new FormControl(false), new FormControl(false), new FormControl(false)]),
     fruitsAr: new FormArray([]),
     hobbies: new FormArray([]),
-    agree: new FormControl(false, { validators: [Validators.required] }),
+    terms: new FormControl(false, [Validators.required, valueMustBeTrue]),
   });
 
   get fruitsChecked() {

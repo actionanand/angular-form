@@ -201,7 +201,7 @@
   <div class="control-row">
     <div class="control">
       <label for="terms-and-conditions">
-        <input type="checkbox" id="terms-and-conditions" name="terms" formControlName="agree" />
+        <input type="checkbox" id="terms-and-conditions" name="terms" formControlName="terms" />
         I agree to the terms and conditions
       </label>
     </div>
@@ -209,6 +209,6 @@
 
   <p class="form-actions">
     <button type="reset" class="button button-flat" (click)="onReset()">Reset</button>
-    <button type="submit" class="button">Sign up</button>
+    <button type="submit" class="button" [disabled]="formObj.invalid">Sign up</button>
   </p>
 </form>
