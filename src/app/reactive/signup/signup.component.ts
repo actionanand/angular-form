@@ -1,5 +1,13 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 import { debounceTime } from 'rxjs';
 
@@ -48,6 +56,7 @@ function valueMustBeTrue(control: AbstractControl) {
 export class SignupComponent implements OnInit {
   protected readonly minPassLen = 5;
   private destroyRef = inject(DestroyRef);
+  private fb = inject(FormBuilder);
 
   protected readonly genderNames = [
     { name: 'Male', value: 'male' },
@@ -127,6 +136,38 @@ export class SignupComponent implements OnInit {
     hobbies: new FormArray([]),
     terms: new FormControl(false, [Validators.required, valueMustBeTrue]),
   });
+
+  /*
+  formObj = this.fb.group({
+    email: this.fb.control('', {
+      validators: [Validators.required, Validators.email]
+    }),
+    passwords: this.fb.group({
+      password: this.fb.control('', [Validators.required, Validators.minLength(this.minPassLen)]),
+      confirmPass: this.fb.control('', [Validators.required, Validators.minLength(this.minPassLen)]),
+    }, {
+      validators: [isValueEqual('password', 'confirmPass')],
+    }),
+    firstName: this.fb.control('', [Validators.required]),
+    lastName: this.fb.control('', {
+      validators: [Validators.required]
+    }),
+    address: this.fb.group({
+      street: this.fb.control('', [Validators.required]),
+      number: this.fb.control('', [Validators.required]),
+      postal: this.fb.control('', [Validators.required]),
+      city: this.fb.control('', [Validators.required]),
+    }),
+    role: this.fb.control<'student' | 'teacher' | 'employee' | 'founder' | 'other'>('student', {
+      validators: [Validators.required]
+    }),
+    gender: this.fb.control<'male' | 'female' | 'others' | null>(null, [Validators.required]),
+    sourceAr: this.fb.array([this.fb.control(false), this.fb.control(false), this.fb.control(false)]),
+    fruitsAr: this.fb.array([]),
+    hobbies: this.fb.array([]),
+    terms: this.fb.control(false, [Validators.required, valueMustBeTrue])
+  });
+  */
 
   ngOnInit(): void {
     const formValSub = this.formObj.valueChanges.pipe(debounceTime(5000)).subscribe({
