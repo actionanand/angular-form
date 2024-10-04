@@ -1,3 +1,5 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <form [formGroup]="formObj" (ngSubmit)="onSubmit()">
   <h2>Welcome on board!</h2>
   <p>We just need a little bit of data from you to get you started 🚀</p>
@@ -5,19 +7,24 @@
   <div class="control">
     <label for="email">Email</label>
     <!-- [formControl]="formObj.controls.email"  we can register 'control' like this also -->
-    <input id="email" type="email" name="email" formControlName="email" />
+    <input id="email" type="email" name="email" formControlName="email" placeholder="Your e-mail" />
   </div>
 
   <div class="control-row" formGroupName="passwords">
     <div class="control">
       <label for="password">Password</label>
       <!-- [formControl]="formObj.controls.passwords.controls.password" we can register 'control' like this also -->
-      <input id="password" type="password" name="password" formControlName="password" />
+      <input id="password" type="password" name="password" formControlName="password" placeholder="Your Password" />
     </div>
 
     <div class="control">
       <label for="confirm-password">Confirm Password</label>
-      <input id="confirm-password" type="password" name="confirm-password" formControlName="confirmPass" />
+      <input
+        id="confirm-password"
+        type="password"
+        name="confirm-password"
+        formControlName="confirmPass"
+        placeholder="Same as Password" />
     </div>
   </div>
 
@@ -27,12 +34,17 @@
     <div class="control-row">
       <div class="control">
         <label for="first-name">First Name</label>
-        <input type="text" id="first-name" name="first-name" formControlName="firstName" />
+        <input
+          type="text"
+          id="first-name"
+          name="first-name"
+          formControlName="firstName"
+          placeholder="Your first name" />
       </div>
 
       <div class="control">
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last-name" formControlName="lastName" />
+        <input type="text" id="last-name" name="last-name" formControlName="lastName" placeholder="Your surname" />
       </div>
     </div>
 
@@ -42,24 +54,24 @@
       <div class="control-row">
         <div class="control">
           <label for="street">Street</label>
-          <input type="text" id="street" name="street" formControlName="street" />
+          <input type="text" id="street" name="street" formControlName="street" placeholder="Street Name" />
         </div>
 
         <div class="control">
           <label for="number">Number</label>
-          <input type="text" id="number" name="number" formControlName="number" />
+          <input type="text" id="number" name="number" formControlName="number" placeholder="Ward & House Number" />
         </div>
       </div>
 
       <div class="control-row">
         <div class="control">
           <label for="postal-code">Postal Code</label>
-          <input type="text" id="postal-code" name="postal-code" formControlName="postal" />
+          <input type="text" id="postal-code" name="postal-code" formControlName="postal" placeholder="PIN code" />
         </div>
 
         <div class="control">
           <label for="city">City</label>
-          <input type="text" id="city" name="city" formControlName="city" />
+          <input type="text" id="city" name="city" formControlName="city" placeholder="Your City Name" />
         </div>
       </div>
     </fieldset>
@@ -161,6 +173,30 @@
       </div>
     }
   </fieldset>
+
+  <hr />
+
+  <div class="hobbies" formArrayName="hobbies">
+    <legend>Hobbies</legend>
+    <br />
+    <div class="hobbies-btn">
+      @if (hobbiesControls.controls.length < 5) {
+        <button (click)="onAddHobby()" class="button">Add</button>
+      }
+
+      @if (hobbiesControls.controls.length > 0) {
+        <button (click)="onClearAll()" class="button btn-danger">Clear All</button>
+      }
+    </div>
+
+    @for (ctrl of hobbiesControls.controls; track ctrl) {
+      <div class="control hobby-control">
+        <input type="text" [formControlName]="$index" placeholder="Your Hobby: {{ $index + 1 }}" />
+        <span class="material-symbols-outlined" (click)="onRemoveHobby($index)"> delete_forever </span>
+        <!-- <button (click)="onRemoveHobby($index)"> Remove </button> -->
+      </div>
+    }
+  </div>
 
   <div class="control-row">
     <div class="control">

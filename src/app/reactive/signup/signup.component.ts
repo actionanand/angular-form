@@ -11,7 +11,7 @@ type MyArray = {
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
+  styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
   protected readonly minPassLen = 5;
@@ -45,8 +45,6 @@ export class SignupComponent {
     { name: 'Grapes', value: 'grapes' },
     { name: 'Orange', value: 'orange' },
   ];
-
-  // hobbyArray: string[] = null;
 
   formObj = new FormGroup({
     email: new FormControl('', {
@@ -88,11 +86,20 @@ export class SignupComponent {
     }),
     sourceAr: new FormArray([new FormControl(false), new FormControl(false), new FormControl(false)]),
     fruitsAr: new FormArray([]),
+    hobbies: new FormArray([]),
     agree: new FormControl(false, { validators: [Validators.required] }),
   });
 
+  get fruitsChecked() {
+    return this.formObj.get('fruitsAr') as FormArray;
+  }
+
+  get hobbiesControls() {
+    return <FormArray>this.formObj.get('hobbies');
+  }
+
   onCheckedFruits(e: Event) {
-    const fruitsChecked: FormArray = this.formObj.get('fruitsAr') as FormArray;
+    // const fruitsChecked: FormArray = this.formObj.get('fruitsAr') as FormArray;
     const checkedVal = (e.target as HTMLInputElement).value;
 
     console.log('Fruit checked: ', e);
@@ -100,14 +107,14 @@ export class SignupComponent {
 
     if ((e.target as HTMLInputElement).checked) {
       // Add a new control in the FormArray
-      fruitsChecked.push(new FormControl(checkedVal));
+      this.fruitsChecked.push(new FormControl(checkedVal));
     } else {
       // find the unselected element
       let i = 0;
 
-      fruitsChecked.controls.forEach(FrmCtrl => {
+      this.fruitsChecked.controls.forEach(FrmCtrl => {
         if (FrmCtrl.value == checkedVal) {
-          fruitsChecked.removeAt(i);
+          this.fruitsChecked.removeAt(i);
           return;
         }
 
@@ -116,9 +123,24 @@ export class SignupComponent {
     }
   }
 
+  onAddHobby() {
+    const control = new FormControl(null, Validators.required);
+    this.hobbiesControls.push(control);
+  }
+
+  onRemoveHobby(index: number) {
+    this.hobbiesControls.removeAt(index);
+  }
+
+  onClearAll() {
+    if (confirm('Are you sure to clear your hobbies?')) {
+      this.hobbiesControls.clear();
+    }
+  }
+
   onSubmit() {
     if (this.formObj.invalid) {
-      // return;
+      return;
     }
 
     console.log('this.formObj => ', this.formObj);
