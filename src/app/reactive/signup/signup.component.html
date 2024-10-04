@@ -118,6 +118,7 @@
 
   <fieldset formArrayName="sourceAr">
     <legend>How did you find us?</legend>
+    <!-- formArray -->
     @for (el of source; track el.value) {
       <div class="control">
         <input type="checkbox" [id]="el.value" name="acquisition" [value]="el.value" [formControlName]="$index" />
@@ -144,6 +145,7 @@
   </fieldset>
 
   <fieldset>
+    <!-- formArray without adding any control at template -->
     <legend>Your favorite Fruits (For Verification)</legend>
     @for (el of fruits; track el.value) {
       <div class="control">
