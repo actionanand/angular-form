@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { NgStyle } from '@angular/common';
 
-import { LoginComponent } from './template-driven/login/login.component';
-import { LoginComponent2 } from './reactive/login/login.component';
+import { TemplateDrivenComponent } from './template-driven/login/login.component';
+import { LoginComponent } from './reactive/login/login.component';
 import { SignupComponent } from './reactive/signup/signup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [LoginComponent, NgStyle, LoginComponent2, SignupComponent],
+  imports: [TemplateDrivenComponent, NgStyle, LoginComponent, SignupComponent],
 })
 export class AppComponent {
   formNumber = 0;
