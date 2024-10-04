@@ -71,11 +71,16 @@
     <div class="control">
       <label for="role">What best describes your role?</label>
       <select id="role" name="role" formControlName="role">
+        @for (el of professon; track el.value) {
+          <option [value]="el.value">{{ el.name }}</option>
+        }
+        <!-- 
         <option value="student">Student</option>
         <option value="teacher">Teacher</option>
         <option value="employee">Employee</option>
         <option value="founder">Founder</option>
         <option value="other">Other</option>
+        -->
       </select>
     </div>
   </div>
@@ -84,24 +89,43 @@
 
   <div class="control-row">
     <label for="role"> Your Gender </label>
+
+    @for (el of genderNames; track el.value) {
+      <div class="radio">
+        <label>
+          <input type="radio" [id]="el.value" name="gender" [value]="el.value" formControlName="gender" />
+          {{ el.name }}
+        </label>
+      </div>
+    }
+
+    <!-- 
     <div class="radio">
       <input type="radio" id="male" name="gender" value="male" formControlName="gender" />
       <label for="html">Male</label>
     </div>
     <div class="radio">
-      <input type="radio" id="female" name="gender" value="female" formControlName="gender" />
-      <label for="css">Female</label>
+      <label> <input type="radio" id="female" name="gender" value="female" formControlName="gender" /> Female </label>
     </div>
     <div class="radio">
       <input type="radio" id="others" name="gender" value="others" formControlName="gender" />
       <label for="html">Not Ready To Tell</label>
-    </div>
+    </div> 
+    -->
   </div>
 
   <br />
 
-  <fieldset formArrayName="source">
+  <fieldset formArrayName="sourceAr">
     <legend>How did you find us?</legend>
+    @for (el of source; track el.value) {
+      <div class="control">
+        <input type="checkbox" [id]="el.value" name="acquisition" [value]="el.value" [formControlName]="$index" />
+        <label for="google"> {{ el.name }} </label>
+      </div>
+    }
+
+    <!-- 
     <div class="control">
       <input type="checkbox" id="google" name="acquisition" value="google" formControlName="0" />
       <label for="google">Google</label>
@@ -115,7 +139,25 @@
     <div class="control">
       <input type="checkbox" id="other" name="acquisition" value="other" formControlName="2" />
       <label for="other">Other</label>
-    </div>
+    </div> 
+    -->
+  </fieldset>
+
+  <fieldset>
+    <legend>Your favorite Fruits (For Verification)</legend>
+    @for (el of fruits; track el.value) {
+      <div class="control">
+        <label>
+          <input
+            type="checkbox"
+            [id]="el.value"
+            [name]="el.value"
+            [value]="el.value"
+            (change)="onCheckedFruits($event)" />
+          {{ el.name }}
+        </label>
+      </div>
+    }
   </fieldset>
 
   <div class="control-row">
