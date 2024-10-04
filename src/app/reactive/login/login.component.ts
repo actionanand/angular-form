@@ -8,7 +8,7 @@ const reqSymbol = '?';
 const reservedEmail = 'ar@example.com';
 
 function isPasswordContainReqChar(control: AbstractControl) {
-  if (control.value.includes(reqSymbol)) {
+  if (control.value?.includes(reqSymbol)) {
     return null;
   } else {
     return { PassNotHaveSymbol: true };
@@ -86,6 +86,14 @@ export class LoginComponent2 implements OnInit {
   }
 
   onSubmit() {
+    if (this.formObj.invalid) {
+      return;
+    }
+
     // this.formObj.controls.emailField.addValidators
+    console.log('this.formObj.controls.emailField => ', this.formObj.controls.emailField);
+    console.log('this.formObj.value => ', this.formObj.value);
+
+    this.formObj.reset();
   }
 }
