@@ -54,8 +54,25 @@ export class SignupComponent {
   });
 
   onSubmit() {
+    if (this.formObj.invalid) {
+      return;
+    }
+
     console.log('this.formObj => ', this.formObj);
     console.log('this.formObj.value => ', this.formObj.value);
+
+    console.log(
+      `'this.formObj.controls.passwords' or 'this.formObj.get('passwords')' => `,
+      this.formObj.controls.passwords,
+    );
+    console.log(
+      `'this.formObj.controls.passwords.value' or 'this.formObj.get('passwords')?.value' => `,
+      this.formObj.controls.passwords.value,
+    );
+    console.log(
+      `'this.formObj.controls.passwords.value.password' or 'this.formObj.get('passwords.password').value' => `,
+      this.formObj.controls.passwords.value.password,
+    );
   }
 
   onReset() {
