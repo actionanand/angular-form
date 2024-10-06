@@ -1,0 +1,38 @@
+.stars {
+  cursor: pointer;
+}
+
+/* When a user hovers over the .stars container, this rule changes the fill color of all polygon elements inside .star elements to yellow (#ffd055) */
+/* It means all stars will be yellow when user hovers */
+.stars:hover .star polygon {
+  fill: #ffd055 !important;
+}
+
+.stars.disabled:hover {
+  cursor: not-allowed;
+}
+
+.stars.disabled:hover .star polygon {
+  fill: #d8d8d8 !important;
+}
+
+.stars .star {
+  float: left;
+  margin: 0px 5px;
+}
+
+.stars .star polygon {
+  fill: #d8d8d8;
+}
+
+/* ~ .star: This is the general sibling combinator. It selects all .star elements that are siblings of the hovered .star and come after it in the DOM. */
+/* When a user hovers over a .star element within the .stars container, this rule changes the fill color of all subsequent sibling .star elements' polygon elements to light gray (#d8d8d8). */
+/* Consider a star rating component with 5 stars. When you hover over the second star, The last 3 stars (third, fourth, and fifth) will change to light gray. */
+
+.stars .star:hover ~ .star polygon {
+  fill: #d8d8d8 !important;
+}
+
+.stars .star.selected polygon {
+  fill: #ffd055 !important;
+}
