@@ -282,6 +282,32 @@ Create nested form groups to represent complex data structures.
 
 Handle form submission events and process the form data.
 
+### `ControlValueAccessor` (CVA) - Explanation
+
+1. `NG_VALUE_ACCESSOR`: This provider tells Angular that your component can act as a CVA.
+2. `writeValue`: This method is called by Angular when the form control's value changes.
+3. `registerOnChange`: This method is called by Angular to register a callback function that will be called when the component's value changes.
+4. `registerOnTouched`: This method is called by Angular to register a callback function that will be called when the component is touched.
+
+The `NG_VALUE_ACCESSOR` is binding things to component's `:host` and linking to methods (`ControlValueAccessor` methods) there. Your module does not have any of those form methods (like `writeValue`, `registerOnTouched` etc). Your form element does. So providing at component level binds this for that specific element. Additionally, providing so deep down means each form control has it's own control value accessor and not a shared one.
+
+Angular Form controls and its API is not the same as the DOM form controls. What angular does is binds to the inputs/outputs of the dom element and provides you with the results. Now, with your custom control, you must provide the same bindings there. By implementing `ControlValueAccessor` and providing `NG_VALUE_ACCESSOR`, you are telling Angular's Forms API how it can read and write values from/to your custom form control. - [Source](https://stackoverflow.com/questions/48085713/why-do-i-need-to-provide-ng-value-accessor-at-the-component-level)
+
+`NG_VALUE_ACCESSOR` is just an injection token for ControlValueAccessor. You can refer the below one:
+
+```ts
+const NG_VALUE_ACCESSOR: InjectionToken<readonly ControlValueAccessor[]>;
+```
+
+### The expanded provider configuration is an object literal with two properties:
+
+- The `provide` property holds the token that serves as the key for consuming the dependency value.
+- The second property is a provider definition object, which tells the injector how to create the dependency value. The provider-definition can be one of the following:
+  1. `useClass` - this option tells Angular DI to instantiate a provided class when a dependency is injected
+  2. `useExisting` - allows you to alias a token and reference any existing one.
+  3. `useFactory` - allows you to define a function that constructs a dependency.
+  4. `useValue` - provides a static value that should be used as a dependency.
+
 ## Sources
 
 1. [How to PROPERLY implement ControlValueAccessor - Angular Form](https://blog.woodies11.dev/how-to-properly-implement-controlvalueaccessor/)

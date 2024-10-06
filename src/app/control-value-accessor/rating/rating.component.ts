@@ -46,8 +46,8 @@ export class RatingComponent implements ControlValueAccessor {
   displayText = '';
   starVal!: number;
 
-  onChanged: any = () => {};
-  onTouched: any = () => {};
+  private onChanged: any = () => {};
+  private onTouched: any = () => {};
 
   writeValue(val: number) {
     this.starVal = val;
