@@ -258,3 +258,30 @@ setTimeout(() => {
 ```
 
 See the code in this project [here](https://github.com/actionanand/angular-form/blob/master/src/app/auth/login/login.component.ts)
+
+## Wiki
+
+### Custom Form Controls `ControlValueAccessor`:
+
+This interface lets you create custom input components that integrate seamlessly with Angular forms. You can define how your component reads and writes values to the form control, as well as how it handles validation and change detection.
+
+### FormArrays:
+
+Manage lists of form controls that can be added or removed dynamically.
+
+### FormGroup:
+
+Create nested form groups to represent complex data structures.
+
+### Observables:
+
+1. `valueChanges`: Use the valueChanges observable to track changes to form controls or the entire form.
+2. `patchValue` and `setValue`: Update form control values programmatically.
+
+### onSubmit:
+
+Handle form submission events and process the form data.
+
+## Sources
+
+1. [How to PROPERLY implement ControlValueAccessor - Angular Form](https://blog.woodies11.dev/how-to-properly-implement-controlvalueaccessor/)
