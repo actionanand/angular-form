@@ -2,11 +2,12 @@ import { afterNextRender, Component, DestroyRef, inject, viewChild } from '@angu
 import { FormsModule, NgForm } from '@angular/forms';
 
 import { debounceTime } from 'rxjs/operators';
+import { RatingComponent } from '../../control-value-accessor/rating/rating.component';
 
 @Component({
   selector: 'app-template-driven',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RatingComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -54,7 +55,7 @@ export class TemplateDrivenComponent {
     }
 
     console.log('Form Obj(NgForm) : ', formEl);
-
+    console.log(formEl.value);
     console.log("formEl.form.controls['emailField'] => ", formEl.form.controls['emailField']);
     console.log("formEl.form.controls['emailField'].value => ", formEl.form.controls['emailField'].value);
     console.log("formEl.form.value['emailField'] => ", formEl.form.value['emailField']);

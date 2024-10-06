@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 
 import { debounceTime } from 'rxjs';
+import { RatingComponent } from '../../control-value-accessor/rating/rating.component';
 
 type MyArray = {
   name: string;
@@ -49,7 +50,7 @@ function valueMustBeTrue(control: AbstractControl) {
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RatingComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -134,6 +135,7 @@ export class SignupComponent implements OnInit {
     sourceAr: new FormArray([new FormControl(false), new FormControl(false), new FormControl(false)]),
     fruitsAr: new FormArray([]),
     hobbies: new FormArray([]),
+    rating: new FormControl(null),
     terms: new FormControl(false, [Validators.required, valueMustBeTrue]),
   });
 
@@ -165,6 +167,7 @@ export class SignupComponent implements OnInit {
     sourceAr: this.fb.array([this.fb.control(false), this.fb.control(false), this.fb.control(false)]),
     fruitsAr: this.fb.array([]),
     hobbies: this.fb.array([]),
+    rating: this.fb.control(null),
     terms: this.fb.control(false, [Validators.required, valueMustBeTrue])
   });
   */
