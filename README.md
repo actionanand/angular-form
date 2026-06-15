@@ -312,3 +312,5 @@ const NG_VALUE_ACCESSOR: InjectionToken<readonly ControlValueAccessor[]>;
 
 1. [How to PROPERLY implement ControlValueAccessor - Angular Form](https://blog.woodies11.dev/how-to-properly-implement-controlvalueaccessor/)
 2. [CSS Previous sibling selectors and how to fake them](https://medium.com/free-code-camp/how-to-make-the-impossible-possible-in-css-with-a-little-creativity-bd96bb42b29d)
+3. [ControlValueAccessor Is Dead. Long Live FormValueControl! 🎉](https://javascript.plainenglish.io/controlvalueaccessor-is-dead-long-live-formvaluecontrol-4cf2e30a4fb0)
+4. [Goodbye 'ControlValueAccessor', Hello Signals! 👋🚦](https://push-based.io/article/goodbye-controlvalueaccessor-hello-signals)
